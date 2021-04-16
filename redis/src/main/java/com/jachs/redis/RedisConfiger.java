@@ -27,4 +27,13 @@ public class RedisConfiger {
 	public void flushDB(Jedis jedis) {
 		jedis.flushDB();
 	}
+	/***
+	 * 查看某个key的剩余生存时间,单位【秒】.永久生存或者不存在的都返回-1
+	 * @param jedis
+	 * @param key
+	 * @return
+	 */
+	public Long ttl(Jedis jedis,String key) {
+		return  jedis.ttl(key);
+	}
 }

@@ -29,6 +29,13 @@ public class QueryTest {
 			System.out.println(key);
 		}
 	}
+
+	@Test
+	public void testBJJJ() {
+		System.out.println("所有元素-stringlists：" + jedis.lrange("stringlists", 0, -1));
+		System.out.println("所有元素-numberlists：" + jedis.lrange("numberlists", 0, -1));
+	}
+
 	/***
 	 * AddTest.test
 	 */
@@ -39,5 +46,14 @@ public class QueryTest {
 		for (int i = 0; i < list.size(); i++) {
 			System.out.println("列表项为: " + list.get(i));
 		}
+	}
+
+	/***
+	 * AddTest.test2
+	 */
+	@Test
+	public void test1() {
+		System.out.println(
+				"一次性获取key201,key202,key203,key204各自对应的值：" + jedis.mget("key201", "key202", "key203", "key204"));
 	}
 }
