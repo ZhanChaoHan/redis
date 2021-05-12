@@ -48,7 +48,9 @@ public class AddTest {
 		jedis.lpush("site-list", "Taobao");
 
 	}
-
+	/***
+	 * 判断索引是否存在
+	 */
 	@Test
 	public void test1() {
 		jedis.flushDB();// 清空redis
@@ -66,5 +68,12 @@ public class AddTest {
 	public void test2() {
 		System.out.println("一次性新增key201,key202,key203,key204及其对应值："
 				+ jedis.mset("key201", "value201", "key202", "value202", "key203", "value203", "key204", "value204"));
+	}
+	/***
+	 * 
+	 */
+	@Test
+	public void test3() {
+		
 	}
 }
