@@ -1,10 +1,14 @@
 package com.jachs.redis.add;
 
+import java.util.List;
+import java.util.Set;
+
 import org.junit.Test;
 
 import com.jachs.redis.RedisConfiger;
 
 import redis.clients.jedis.Jedis;
+import redis.clients.jedis.params.ZAddParams;
 
 /***
     Redis 有序集合和集合一样也是 string 类型元素的集合,且不允许重复的成员。</br>
@@ -16,9 +20,60 @@ import redis.clients.jedis.Jedis;
  */
 public class AddSortedSetTest {
 	Jedis jedis = new RedisConfiger().init();
+	private static final String KEY="z_setKey";
+	private static final String KEY_1="z_setKey02";
 	
+	//添加双精度数据
 	@Test
 	public void test1() {
+		jedis.zadd(KEY,2.36,"jack");
+		jedis.zadd(KEY,1.36,"jame");
+		jedis.zadd(KEY,5.6,"pens");
+		jedis.zadd(KEY,3.6,"大头");
+		jedis.zadd(KEY,0.6,"百度");
+		jedis.zadd(KEY,8.6,"cji");
+	}
+	//取单值
+	@Test
+	public void test6() {
+		System.out.println(jedis.zscore(KEY, "jack"));
+	}
+	
+	//取范围数据
+	@Test
+	public void test2() {
+		Long start=1L;
+		Long end=5L;
 		
+		Set<String> set=jedis.zrange(KEY,start,end);
+		
+		set.forEach(a->{
+			System.out.println(a);
+		});
+	}
+	//取范围数个数
+	@Test
+	public void test5() {
+		Long start=1L;
+		Long end=5L;
+		
+		Long count=jedis.zcount(KEY, start, end);
+		
+		System.out.println(count);
+	}
+	
+	//删除
+	@Test
+	public void test3() {
+		jedis.zrem(KEY, "pens","jame");
+		
+		Long start=1L;
+		Long end=10L;
+		
+		Set<String> set=jedis.zrange(KEY,start,end);
+		
+		set.forEach(a->{
+			System.out.println(a);
+		});
 	}
 }
