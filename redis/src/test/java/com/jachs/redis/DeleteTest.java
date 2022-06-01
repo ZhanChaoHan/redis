@@ -12,6 +12,13 @@ import redis.clients.jedis.Jedis;
 public class DeleteTest {
 	Jedis jedis = new RedisConfiger().init();
 
+	
+	@Test
+	public void flushDB() {
+		String str=jedis.flushDB();// 清空redis
+		
+		System.out.println(str);
+	}
 	/**
 	 * 单条删除
 	 */
